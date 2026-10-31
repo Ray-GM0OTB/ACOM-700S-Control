@@ -21,7 +21,7 @@ Grab **ACOM-Control-macOS.zip** from the [latest release](../../releases/latest)
 You need a Mac on macOS 13 or later with Xcode or just the Command Line Tools (`xcode-select --install`).
 
 ```bash
-cd ACOM-700S-Control
+cd ACOM-700S-Comtrol
 chmod +x build-app.sh
 ./build-app.sh
 open dist
