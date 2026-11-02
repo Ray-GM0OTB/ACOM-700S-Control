@@ -14,7 +14,7 @@ A native SwiftUI app for controlling and monitoring the **ACOM 700S** (and 500S 
 
 ## Download
 
-Grab **ACOM-Control-macOS.zip** from the [latest release](../../releases/latest), unzip it and drag **ACOM Control.app** into Applications. The first time, right-click → **Open**, because the app is ad-hoc signed rather than notarised.
+Grab **ACOM-Control.dmg** from the [latest release](../../releases/latest), open it and drag **ACOM Control** onto the **Applications** folder. The first time, right-click → **Open**, because the app is ad-hoc signed rather than notarised.
 
 ## Build from source
 
@@ -24,6 +24,7 @@ You need a Mac on macOS 13 or later with Xcode or just the Command Line Tools (`
 cd ACOM-700S-Control
 chmod +x build-app.sh
 ./build-app.sh
+./make-dmg.sh      # optional: builds dist/ACOM-Control.dmg
 open dist
 ```
 

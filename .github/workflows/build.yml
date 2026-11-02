@@ -21,13 +21,21 @@ jobs:
         run: bash build-app.sh
       - name: Zip app
         run: cd dist && ditto -c -k --keepParent "ACOM Control.app" ACOM-Control-macOS.zip
+      - name: Make disk image
+        run: bash make-dmg.sh
       - uses: actions/upload-artifact@v4
         with:
           name: ACOM-Control-macOS
           path: dist/ACOM-Control-macOS.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ACOM-Control-dmg
+          path: dist/ACOM-Control.dmg
       - name: Attach to release
         if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/ACOM-Control-macOS.zip
+          files: |
+            dist/ACOM-Control.dmg
+            dist/ACOM-Control-macOS.zip
           tag_name: ${{ github.event.release.tag_name || github.ref_name }}
