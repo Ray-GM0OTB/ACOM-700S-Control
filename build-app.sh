@@ -5,8 +5,15 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 APP="dist/ACOM Control.app"
-swift build -c release --arch arm64 --arch x86_64
-BIN="$(swift build -c release --arch arm64 --arch x86_64 --show-bin-path)/ACOMControl"
+# Universal (Apple silicon + Intel) needs full Xcode; fall back to this Mac's own
+# architecture when only the Command Line Tools are installed.
+if swift build -c release --arch arm64 --arch x86_64 2>/dev/null; then
+  BIN="$(swift build -c release --arch arm64 --arch x86_64 --show-bin-path)/ACOMControl"
+else
+  echo "Universal build unavailable (needs Xcode) - building for this Mac only."
+  swift build -c release
+  BIN="$(swift build -c release --show-bin-path)/ACOMControl"
+fi
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
